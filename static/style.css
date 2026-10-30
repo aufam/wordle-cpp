@@ -1,0 +1,294 @@
+:root {
+  --bg: #1c1626;
+  --surface: #261f33;
+  --line: #4a3f63;
+  --line-active: #9c8fc0;
+  --text: #f3eefc;
+  --muted: #a99fc4;
+
+  --correct: #2e9e78;
+  --present: #d9a21b;
+  --absent: #3d3453;
+
+  --tile: min(3.9rem, 15vw);
+  --gap: 0.35rem;
+  --font: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.25rem 0.75rem 2rem;
+}
+
+.masthead {
+  text-align: center;
+}
+
+.masthead h1 {
+  margin: 0;
+  font-size: 2.6rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.masthead p {
+  margin: 0.4rem 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+main {
+  width: 100%;
+  max-width: 30rem;
+}
+
+.game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ---------- toast ---------- */
+.toast-slot {
+  height: 3rem;
+  display: grid;
+  place-items: center;
+}
+
+.toast {
+  background: var(--text);
+  color: var(--bg);
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: 0.4rem;
+}
+
+/* ---------- board ---------- */
+.board {
+  display: grid;
+  gap: var(--gap);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(5, var(--tile));
+  gap: var(--gap);
+}
+
+.tile {
+  --final: var(--surface);
+  width: var(--tile);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  background: var(--final);
+  border: 2px solid var(--line);
+  border-radius: 0.3rem;
+  font-size: calc(var(--tile) * 0.55);
+  font-weight: 800;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.tile.typed {
+  border-color: var(--line-active);
+}
+
+.tile.correct {
+  --final: var(--correct);
+  border-color: var(--correct);
+}
+
+.tile.present {
+  --final: var(--present);
+  border-color: var(--present);
+}
+
+.tile.absent {
+  --final: var(--absent);
+  border-color: var(--absent);
+}
+
+/* The reveal: each tile flips edge-on, swaps to its result colour, flips back. */
+.tile.flip {
+  animation: flip 0.6s ease both;
+}
+
+@keyframes flip {
+
+  0%,
+  49% {
+    transform: rotateX(0deg);
+    background: var(--surface);
+    border-color: var(--line-active);
+  }
+
+  49.9% {
+    transform: rotateX(90deg);
+    background: var(--surface);
+  }
+
+  50% {
+    transform: rotateX(90deg);
+    background: var(--final);
+    border-color: var(--final);
+  }
+
+  100% {
+    transform: rotateX(0deg);
+    background: var(--final);
+    border-color: var(--final);
+  }
+}
+
+.row.shake {
+  animation: shake 0.4s;
+}
+
+@keyframes shake {
+
+  20%,
+  60% {
+    transform: translateX(-6px);
+  }
+
+  40%,
+  80% {
+    transform: translateX(6px);
+  }
+}
+
+/* ---------- end of game ---------- */
+.end {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.game-over {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.end-title {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 500;
+}
+
+.answer {
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.again {
+  font: inherit;
+  font-weight: 800;
+  color: #fff;
+  background: var(--correct);
+  border: 0;
+  border-radius: 0.4rem;
+  padding: 0.6rem 1.1rem;
+  cursor: pointer;
+}
+
+.again:hover {
+  filter: brightness(1.1);
+}
+
+/* ---------- keyboard ---------- */
+.keyboard {
+  margin-top: 1.5rem;
+  width: 100%;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.krow {
+  display: flex;
+  justify-content: center;
+  gap: 0.3rem;
+}
+
+.key {
+  flex: 1 1 0;
+  max-width: 2.8rem;
+  height: 3.4rem;
+  padding: 0;
+  font: inherit;
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  color: var(--text);
+  background: var(--line);
+  border: 0;
+  border-radius: 0.35rem;
+  cursor: pointer;
+}
+
+.key.wide {
+  flex-grow: 1.6;
+  max-width: 4.4rem;
+  font-size: 0.78rem;
+}
+
+.key.correct {
+  background: var(--correct);
+}
+
+.key.present {
+  background: var(--present);
+  color: #1c1626;
+}
+
+.key.absent {
+  background: var(--absent);
+  color: var(--muted);
+}
+
+.key:hover:not(:disabled) {
+  filter: brightness(1.15);
+}
+
+.key:disabled {
+  cursor: default;
+}
+
+.key:focus-visible,
+.again:focus-visible {
+  outline: 3px solid var(--text);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .tile.flip,
+  .row.shake {
+    animation: none;
+  }
+}
