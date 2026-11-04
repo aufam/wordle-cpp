@@ -14,6 +14,6 @@ path = "tests"
 
 [dependencies]
 brb = { path = "/home/aufa/brb", features = ["static_files"] }
-mup = { path = "/home/aufa/learning/cpp/mup" }
+mup = { version = "0.1.0" }
 boost = { version = "1.92.0" }
 fmt = { version = "12.2.0" }

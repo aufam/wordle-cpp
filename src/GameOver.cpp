@@ -6,8 +6,8 @@ using namespace mup::html;
 
 
 std::string Wordle::GameOver(std::string status) {
-    using game_over = div_<id_ == "game-over", class_ == "game-over", hx_swap_oob == "outerHTML">;
-    using end_title = div_<class_ == "end-title">;
+    using game_over = div_<(id = "game-over", class_ = "game-over", hx_swap_oob = "outerHTML")>;
+    using end_title = div_<(class_ = "end-title")>;
 
     prev_status = status;
 
@@ -29,8 +29,6 @@ std::string Wordle::GameOver(std::string status) {
             return "";
         }(),
 
-        button<class_ == "again", type_ == "button", hx_post == "new", hx_target == "#game", hx_swap == "outerHTML">{
-            "Play again"
-        },
+        button<(class_ = "again", type = "button", hx_post = "new", hx_target = "#game", hx_swap = "outerHTML")>{"Play again"},
     };
 }

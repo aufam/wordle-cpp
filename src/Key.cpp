@@ -20,12 +20,12 @@ std::string Wordle::Key(std::string k, bool disable) {
     else if (label == "enter")
         label = "Enter";
 
-    return button<type_ == "button", hx_swap_oob == "outerHTML">{
-        id_        = "key-" + k,
-        class_     = fmt::format("key {} {}", k.size() == 1 ? mark_class(keys[k[0]]) : "", k.size() > 1 ? "wide" : ""),
-        hx_post    = "press/" + k,
-        aria_label = k,
-        disabled_  = disable,
+    return button<(type = "button", hx_swap_oob = "outerHTML")>{
+        (id         = "key-" + k,
+         class_     = fmt::format("key {} {}", k.size() == 1 ? mark_class(keys[k[0]]) : "", k.size() > 1 ? "wide" : ""),
+         hx_post    = "press/" + k,
+         aria_label = k,
+         disabled   = disable),
 
         label,
     };

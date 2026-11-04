@@ -19,7 +19,7 @@ auto tile_label(char letter, int m) {
 std::string Wordle::Tile(size_t i, size_t j, bool flash) {
     auto &g = *this;
 
-    auto div = div_<role_ == "gridcell", hx_swap_oob == "outerHTML">{};
+    auto div = div_<(role = "gridcell", hx_swap_oob = "outerHTML")>{};
     div.attributes.push_back(fmt::format("id=\"tile-{}-{}\"", i, j));
 
     std::vector<std::string> classes = {"tile"};

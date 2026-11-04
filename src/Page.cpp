@@ -5,28 +5,28 @@ using namespace mup::html;
 
 
 std::string Wordle::Page() {
-    return html<lang_ == "en">(
+    return html<(lang = "en")>(
         head<>(
-            meta<charset_ == "utf-8">,
-            meta<name_ == "htmx-config", R"(content='{"allowNestedOobSwaps": false}')">,
-            meta<name_ == "viewport", content_ == "width=device-width, initial-scale=1">,
+            meta<(charset = "utf-8")>,
+            meta<(name = "htmx-config", R"(content='{"allowNestedOobSwaps": false}')")>,
+            meta<(name = "viewport", content_ = "width=device-width, initial-scale=1")>,
 
-            link_<rel_ == "preconnect", href_ == "https://fonts.googleapis.com">,
-            link_<rel_ == "preconnect", href_ == "https://fonts.gstatic.com", crossorigin_ == true>,
-            link_<
-                rel_ == "stylesheet",
-                href_ == "https://fonts.googleapis.com/"
-                         "css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&display=swap",
-                crossorigin_ == true
-            >,
-            link_<rel_ == "stylesheet", href_ == "style.css">,
+            link_<(rel = "preconnect", href = "https://fonts.googleapis.com")>,
+            link_<(rel = "preconnect", href = "https://fonts.gstatic.com", crossorigin)>,
+            link_<(
+                rel  = "stylesheet",
+                href = "https://fonts.googleapis.com/"
+                       "css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&display=swap",
+                crossorigin
+            )>,
+            link_<(rel = "stylesheet", href = "style.css")>,
 
             title<>{"Wordle"},
-            script<src_ == "https://unpkg.com/htmx.org@2.0.4">{}
+            script<(src = "https://cdn.jsdelivr.net/npm/htmx.org@4.0.1/dist/htmx.min.js", crossorigin = "anonymous")>{}
         ),
 
         body<>(
-            header<class_ == "masthead">{
+            header<(class_ = "masthead")>{
                 h1<>{"Wordle"},
                 p<>{"Guest the five-letter word in six tries."},
             },
@@ -35,7 +35,7 @@ std::string Wordle::Page() {
                 Game(),
             },
 
-            script<src_ == "app.js">{}
+            script<(src = "app.js")>{}
         )
     );
 }
