@@ -292,3 +292,76 @@ main {
     animation: none;
   }
 }
+
+.mode-toggle {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0 1.25rem;
+}
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+
+  padding: 0.55rem 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+
+  background: var(--surface);
+  color: var(--muted);
+
+  font-family: var(--font);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+
+  cursor: pointer;
+  transition: border-color 150ms ease, color 150ms ease,
+    background-color 150ms ease;
+}
+
+/* Indicator */
+.toggle::before {
+  content: "";
+  width: 0.55rem;
+  height: 0.55rem;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--muted);
+  transition: background-color 150ms ease, box-shadow 150ms ease;
+}
+
+/* Active */
+.toggle[aria-pressed="true"] {
+  color: var(--correct);
+  border-color: var(--correct);
+  background: color-mix(in srgb, var(--correct) 10%, var(--surface));
+}
+
+.toggle[aria-pressed="true"]::before {
+  background: var(--correct);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--correct) 20%, transparent);
+}
+
+/* Hover */
+.toggle:hover {
+  border-color: var(--line-active);
+  color: var(--text);
+}
+
+.toggle[aria-pressed="true"]:hover {
+  border-color: var(--correct);
+  color: var(--correct);
+}
+
+/* Focus */
+.toggle:focus-visible {
+  outline: 2px solid var(--line-active);
+  outline-offset: 3px;
+}
+
+/* Press */
+.toggle:active {
+  transform: scale(0.97);
+}

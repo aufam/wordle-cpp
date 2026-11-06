@@ -9,20 +9,18 @@ std::string Wordle::Game() {
     return div_<(id = "game", class_ = "game")>{
         div_<(class_ = "toast-slot", role = "status", aria_live = "polite")>{Toast("")},
 
-        div_<(class_ = "board", role = "grid", aria_label = "Guesses")>{
+        div_<(class_ = "mode-toggle")>{ToggleHardMode()},
 
+        div_<(class_ = "board", role = "grid", aria_label = "Guesses")>{
             mup::each(std::views::iota(0ul, max_guess), [&](size_t i) { return Row(i); })
         },
 
         GameOver(prev_status),
 
-        div_<(class_ = "keyboard")>{
-
-            mup::each(key_rows, [&](const std::vector<std::string> &keys) {
-                return div_<(class_ = "krow")>{
-                    mup::each(keys, [&](auto &k) { return Key(k); }),
-                };
-            })
-        }
+        div_<(class_ = "keyboard")>{mup::each(key_rows, [&](const std::vector<std::string> &keys) {
+            return div_<(class_ = "krow")>{
+                mup::each(keys, [&](auto &k) { return Key(k); }),
+            };
+        })}
     };
 }
